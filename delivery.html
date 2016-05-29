@@ -1,0 +1,140 @@
+<!-- 配送方法 -->
+<div id="delivery" class="mar_b_50">
+  <h2 class="pad_l_10 mar_b_30 txt_28 txt_fwn bor_b_1">配送・送料について</h2>
+  <dl>
+    <{section name=num loop=$sk_delivery}>
+      <dt class="txt_18 txt_fwn mar_b_10"><{$sk_delivery[num].name}></dt>
+      <dd class="pad_r_10 mar_b_30 mar_l_0 txt_12">
+        <{if $sk_delivery[num].img_url != "" }>
+          <img src="<{$sk_delivery[num].img_url}>" /><br />
+        <{/if}>
+        <{$sk_delivery[num].other}>&nbsp;
+      </dd>
+    <{/section}>
+  </dl>
+</div>
+<!-- // 配送方法 -->
+<!-- 支払い方法 -->
+<div id="payment" class="mar_b_50">
+  <h2 class="pad_l_10 mar_b_30 txt_28 txt_fwn bor_b_1">支払い方法について</h2>
+  <dl>
+    <{section name=num loop=$sk_payment}>
+      <dt class="txt_18 txt_fwn mar_b_10"><{$sk_payment[num].name}></dt>
+      <dd class="pad_r_10 mar_b_30 mar_l_0 txt_12">
+        <{if $sk_payment[num].img_url != "" }>
+          <img src="<{$sk_payment[num].img_url}>" /><br />
+        <{/if}>
+        <{if $sk_payment[num].card_img != "" }>
+          <{$sk_payment[num].card_img}><br />
+        <{/if}>
+        <{$sk_payment[num].other}>&nbsp;
+      </dd>
+    <{/section}>
+  </dl>
+</div>
+<!-- // 支払い方法 -->
+<!-- 特定商法取引法に基づく表記 -->
+<div id="info" class="mar_b_50">
+  <h2 class="pad_l_10 mar_b_30 txt_28 txt_fwn bor_b_1">特定商取引法に基づく表記</h2>
+  <table class="tokutei">
+    <{if $shop.service_name != ""}>
+    <tr>
+      <th>サービス名</th>
+      <td><{$shop.service_name}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.shop_name != ""}>
+    <tr>
+      <th>販売業者</th>
+      <td><{$shop.shop_name}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.manager_name != ""}>
+    <tr>
+      <th>運営統括責任者</th>
+      <td><{$shop.manager_name}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.postal != ""}>
+    <tr>
+      <th>所在地</th>
+      <td><{$shop.postal}> <{$shop.address}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.price != ""}>
+    <tr>
+      <th>代金以外の必要料金</th>
+      <td><{$shop.price}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.apply_limit != ""}>
+    <tr>
+      <th>申込の有効期限</th>
+      <td><{$shop.apply_limit}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.bad_product != ""}>
+    <tr>
+      <th>不良品について</th>
+      <td><{$shop.bad_product}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.sales_num != ""}>
+    <tr>
+      <th>販売数量</th>
+      <td><{$shop.sales_num}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.delivery_time != ""}>
+    <tr>
+      <th>商品の引渡し時期</th>
+      <td><{$shop.delivery_time}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.payment_way != ""}>
+    <tr>
+      <th>お支払方法</th>
+      <td><{$shop.payment_way}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.payment_limit != ""}>
+    <tr>
+      <th>お支払い期限</th>
+      <td><{$shop.payment_limit}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.return_limit != ""}>
+    <tr>
+      <th>返品期限</th>
+      <td><{$shop.return_limit}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.return_price != ""}>
+    <tr>
+      <th>返品送料</th>
+      <td><{$shop.return_price}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.license != ""}>
+    <tr>
+      <th>資格・免許</th>
+      <td><{$shop.license}></td>
+    </tr>
+    <{/if}>
+    <{if $shop.hp_address != ""}>
+    <tr>
+      <th>サイトURL</th>
+      <td><{$shop.hp_address}></td>
+    </tr>
+    <{/if}>
+    <tr>
+      <th>その他</th>
+      <td>
+        注文後、ご希望の注文数量および発送日に添えない場合がありますので予めご了承ください。その他、ご不明な点などございましたら 下記の連絡先までお問い合わせください。<br>
+        メール：<{$shop.email}><br>
+        電話：<{$shop.tel}><br>
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- // 特定商法取引法に基づく表記 -->

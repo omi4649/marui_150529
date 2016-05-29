@@ -1,0 +1,281 @@
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0,minimal-ui">
+<link rel="stylesheet" type="text/css" href="http://www.maruisyoyu.com/data/reset.css">
+<script src="http://www.maruisyoyu.com/js/jquery.min.js"></script>
+<script src="http://img.shop-pro.jp/tmpl_js/73/jquery.skOuterClick.js"></script>
+<script src="http://img.shop-pro.jp/tmpl_js/73/jquery.tile.js"></script>
+<script src="http://www.maruisyoyu.com/js/fullSlideShow.js"></script>
+
+
+<!-- スライドショー -->
+<{if $tpl_name == "top"}>
+<div class="fullSlideShow">
+ <ul>
+   <li><a href="#1"><img src="http://www.maruisyoyu.com/data/1.JPG" alt=""></a></li>
+   <li><a href="#2"><img src="http://www.maruisyoyu.com/data/3.JPG" alt=""><div class="caption1">キャプション 3</div></a></li>
+   <li><a href="#3"><img src="http://www.maruisyoyu.com/data/4.JPG" alt=""><div class="caption1">キャプション 4</div></a></li>
+   <li><a href="#4"><img src="http://www.maruisyoyu.com/data/2.JPG" alt=""></a></li>
+   <div class="caption1">キャプ 2</div>
+ </ul>
+</div>
+<{/if}>
+<!-- // スライドショー -->
+
+<!-- ヘッダーコンテナ -->
+<{if $tpl_name == "top"}>
+<div id="headerBoxA">
+<{else}>
+<div id="headerBoxB">
+<{/if}>
+  <!-- ヘッダータグ -->
+  <div id="header">
+    <!-- ヘッダ部品１ （ロゴ） -->
+    <div class="headerItem1">
+      <a href="<{$home_url}>">
+        <img src="http://www.maruisyoyu.com/data/logo_w.png" alt="マルヰ醤油株式会社" style="height:50px;"></img>
+      </a>
+      <p class="txt_10 mar_l_20 mar_b_10">信州から手作りのお醤油をお届けいたします。</p>
+    </div>  <!-- // ヘッダ部品１ -->
+    <!-- ヘッダ部品2 （カートアイコン） -->
+    <div class="headerItem2 mar_t_20 mar_r_20">
+      <a href="<{$view_cart_url}>"><img src="http://www.maruisyoyu.com/icon/cart24w.png" alt="カートの中"></img></a>
+    </div>  <!-- // ヘッダ部品2 -->
+    <!-- ヘッダ部品3 （あと○円で送料無料） -->
+    <div class="headerItem3 mar_t_20 mar_r_60">
+      <{if $incart != "" && $incart_delivery}>
+      <ul>
+        <{section name=num loop=$incart_delivery}>
+        <li>
+          <{$incart_delivery[num].delivery_name}>
+          <{if $incart_delivery[num].balance > 0}>
+          あと<b><{$incart_delivery[num].balance}>円</b>で<b>送料無料！</b>
+          <{else}>
+          <b>送料無料</b>です！
+          <{/if}>
+        </li>
+        <{/section}>
+      </ul>
+      <{/if}>
+    </div>  <!-- // ヘッダ部品3 -->
+  </div>  <!-- // ヘッダータグ -->
+</div>  <!-- // ヘッダーコンテナ -->
+
+<!-- コンテンツコンテナ -->
+<div id="contentsBox">
+
+  <!-- コンテンツ -->
+  <div id="contents">
+    <!-- // コンテンツマージン -->
+    <div class="contentsMar">
+      <!-- コンテンツたち -->
+      <div class="mar_t_20">
+        <{include file = $file_name}>
+      </div>
+      <!-- // コンテンツたち -->
+
+      <!-- 最近チェックした商品 -->
+      <{if $history_num != 0}>
+      <div class="mar_b_50">
+        <h2 class="pad_l_10 mar_b_20 txt_28 txt_fwn bor_b_1">最近チェックした商品</h2>
+        <ul class="row unstyled">
+          <{section name=num loop=$history}>
+          <li class="col col-xs-4 col-sm-3 col-lg-2 history-unit pad_10 txt_10 mar_b_20 txt_c">
+            <a href="<{$history[num].link_url}>">
+              <{if $history[num].img_url != ""}>
+                <img src="<{$history[num].img_url}>" alt="<{$history[num].name}>" class="show mar_auto mar_b_10" />
+              <{else}>
+                <img src="http://img.shop-pro.jp/tmpl_img/73/noimage.png" alt="<{$history[num].name}>" class="show mar_auto mar_b_10" />
+              <{/if}>
+            </a>
+            <a href="<{$history[num].link_url}>"><{$history[num].name}></a>
+            <{if $history[num].s_expl != ""}>
+              <{$history[num].s_expl}>
+            <{/if}>
+            <{if $history[num].soldout_flg == false}>
+              <{if $members_login_flg == true && $history[num].discount_flg == true}>
+                <{$history[num].regular_price}>
+              <{/if}>
+              <{$history[num].price}>
+              <{if $members_login_flg == true && $history[num].discount_flg == true}>
+                <{$history[num].discount_rate}>OFF!!
+              <{/if}>
+            <{else}>
+              SOLD OUT
+            <{/if}>
+          </li>
+          <{/section}>
+        </ul>
+      </div>
+      <{/if}> <!-- // 最近チェックした商品 -->
+    </div>  <!-- // コンテンツ -->
+  </div>  <!-- // コンテンツマージン -->
+
+  <!-- サイド -->
+  <div id="side">
+    <!-- 商品検索フォーム -->
+    <form class="mar_t_20 mar_b_20 mar_l_20" action="<{$product_search_url}>" method="GET">
+      <{$product_search_mode}>
+      <input type="text" name="keyword" style="width:140px" placeholder="何かお探しですか？"/>
+      <button class="btn btn-xs"><i class="icon-lg-b icon-search va-35"></i></button>
+    </form> <!-- // 商品検索フォーム -->
+
+    <!-- ナビゲーション -->
+    <ul class="bor_b_1 mar_b_50" style="list-style-type:none;">
+      <li class="pad_20 bor_t_1">
+        <a href="<{$home_url}>" class="show txt_c_333 mar_b_10"><img class="icon mar_r_10" src="http://www.maruisyoyu.com/icon/home16b.png" alt=""></img>トップ</a>
+        <a href="<{$free1_link}>" class="show txt_c_333 mar_b_10"><img class="icon mar_r_10" src="http://www.maruisyoyu.com/icon/mount16b.png" alt=""></img>マルヰ醤油とは</a>
+        <a href="<{$free2_link}>" class="show txt_c_333 mar_b_10"><img class="icon mar_r_10" src="http://www.maruisyoyu.com/icon/mount16b.png" alt=""></img>商品のご紹介</a>
+        <a href="<{$view_inq_url}>" class="show txt_c_333 mar_b_10"><img class="icon mar_r_10" src="http://www.maruisyoyu.com/icon/mail16b.png" alt=""></img>お問い合わせ</a>
+        <a href="<{$free3_link}>" class="show txt_c_333 mar_b_10"><img class="icon mar_r_10" src="http://www.maruisyoyu.com/icon/sushi16b.png" alt=""></img>店主の日記</a>
+        <a href="<{$free4_link}>" class="show txt_c_333 mar_b_10"><img class="icon mar_r_10" src="http://www.maruisyoyu.com/icon/mount16b.png" alt=""></img>会社概要</a>
+      </li>
+    </ul> <!-- // ナビゲーション -->
+
+    <!-- ご利用案内 -->
+    <h3 class="pad_l_20">ご利用案内</h3>
+    <ul class="bor_b_1 mar_b_50">
+      <li class="pad_20 bor_t_1">
+        <a href="<{$view_cart_url}>" class="show txt_c_333 mar_b_10"><img class="mar_r_10" src="http://www.maruisyoyu.com/icon/cart16b.png" alt=""></img>カートの中</a>
+        <a href="<{$sk_url}>#payment" class="show txt_c_333 mar_b_10"> <img class="mar_r_10" src="http://www.maruisyoyu.com/icon/car16b.png" alt=""></img>お支払い方法</a>
+        <a href="<{$sk_url}>" class="show txt_c_333 mar_b_10"> <img class="mar_r_10" src="http://www.maruisyoyu.com/icon/car16b.png" alt=""></img>配送方法・送料</a>
+        <a href="#contents" class="show txt_c_333 mar_b_10"><img class="mar_r_10" src="http://www.maruisyoyu.com/icon/cart16b.png" alt=""></img>テスト</a>
+    </ul>   <!-- // ご利用案内 -->
+
+    <!-- 会員メニュー -->
+    <h3 class="pad_l_20">会員メニュー</h3>
+    <ul class="bor_b_1 mar_b_50">
+      <li class="pad_20 bor_t_1">
+        <a href="<{$view_myaccount_url}>" class="txt_c_333"><img class="mar_r_10" src="http://www.maruisyoyu.com/icon/user16b.png" alt=""></img>マイアカウント</a>
+        <{if $members_use_flg == true}>
+        <{if $members_login_flg == false}>
+        <{if $members_register_flg == true}>
+        <a href="<{$members_regi_url}>" class="txt_c_333">会員登録</a>
+        <{/if}>
+        <a href="<{$members_login_url}>" class="txt_c_333">ログイン</a></li>
+        <{else}>
+        <a href="<{$members_login_url}>" class="txt_c_333">ログアウト</a></li>
+        <{/if}>
+        <{/if}>
+      </li>
+    </ul>   <!-- // 会員メニュー -->
+
+    <!-- カテゴリーリスト -->
+    <{section name=num loop=$category}>
+    <{if $smarty.section.num.first }>
+    <div>
+      <h3 class="pad_l_20">カテゴリーから探す</h3>
+      <ul class="unstyled bor_b_1 mar_b_50">
+    <{/if}>
+        <li class="pad_10 bor_t_1">
+          <a href="<{$category[num].link_url}>" class="show txt_c_333">
+            <{if $category[num].img_url != ""}>
+              <img src="<{$category[num].img_url}>" class="show hidden-phone mar_b_5" />
+            <{/if}>
+            <{$category[num].name}>
+          </a>
+        </li>
+    <{if $smarty.section.num.last }>
+      </ul>
+    </div>
+    <{/if}>
+    <{/section}>  <!-- // カテゴリーリスト -->
+
+    <!-- グループリスト -->
+    <{section name=num loop=$group}>
+    <{if $smarty.section.num.first }>
+    <div>
+      <h3 class="pad_l_10">グループから探す</h3>
+      <ul class="unstyled bor_b_1 mar_b_50">
+    <{/if}>
+        <li class="pad_10 bor_t_1">
+          <a href="<{$group[num].link_url}>" class="show txt_c_333">
+            <{if $group[num].img_url != ""}>
+              <img src="<{$group[num].img_url}>" class="show hidden-phone mar_b_5" />
+            <{/if}>
+            <{$group[num].name}>
+          </a>
+        </li>
+    <{if $smarty.section.num.last }>
+      </ul>
+    </div>
+    <{/if}>
+    <{/section}>  <!-- // グループリスト -->
+
+    <!-- フリー -->
+    <div>
+      <h3 class="pad_l_10">コンテンツ</h3>
+      <ul class="unstyled bor_b_1 mar_b_50">
+        <!-- フリーページ -->
+        <{if $free_area_flg == true}>
+        <{section name=num loop=$freepage}>
+        <li class="pad_10 bor_t_1"><a href="<{$freepage[num].link_url}>" class="show txt_c_333"><{$freepage[num].page_title}></a></li>
+        <{/section}>
+        <{/if}>
+        <!-- // フリーページ -->
+
+      <{if $manager_url != ""}>
+      <li class="pad_10 bor_t_1"><a href="<{$manager_url}>" class="show txt_c_333">ショップブログ</a></li>
+      <{/if}>
+      <li class="pad_10 bor_t_1"><a href="<{$sk_url}>#payment" class="show txt_c_333">お支払い方法</a></li>
+      <li class="pad_10 bor_t_1"><a href="<{$sk_url}>" class="show txt_c_333">配送方法・送料</a></li>
+
+      <!-- 会員メニュー(480px以下で表示) -->
+      <li class="pad_10 bor_t_1 visible-phone"><a href="<{$view_myaccount_url}>" class="txt_c_333">マイアカウント</a></li>
+      <{if $members_use_flg == true}>
+      <{if $members_login_flg == false}>
+      <{if $members_register_flg == true}>
+        <li class="pad_10 bor_t_1 visible-phone"><a href="<{$members_regi_url}>" class="txt_c_333">会員登録</a></li>
+      <{/if}>
+        <li class="pad_10 bor_t_1 visible-phone"><a href="<{$members_login_url}>" class="txt_c_333">ログイン</a></li>
+      <{else}>
+        <li class="pad_10 bor_t_1 visible-phone"><a href="<{$members_login_url}>" class="txt_c_333">ログアウト</a></li>
+      <{/if}>
+      <{/if}>
+      </ul>   <!-- // 会員メニュー(480px以下で表示) -->
+    </div>  <!-- // フリー -->
+  </div>  <!-- // サイド -->
+</div>  <!-- // コンテンツコンテナ -->
+
+<!-- フッター -->
+<div id="footer" class="pad_v_30 bor_t_1 txt_c">
+  <ul class="inline">
+    <li><a href="<{$home_url}>" class="txt_c_333">ホーム</a></li>
+    <li><a href="<{$sk_url}>" class="txt_c_333">支払・配送について</a></li>
+    <li><a href="<{$sk_url}>#info" class="txt_c_333">特定商取引法に基づく表記</a></li>
+    <li><a href="<{$privacy_url}>" class="txt_c_333">プライバシーポリシー</a></li>
+    <li><a href="<{$view_inq_url}>" class="txt_c_333">お問い合わせ</a></li>
+  </ul>
+  <p><address><{$e_copyright}></address></p>
+</div>  <!-- // フッター -->
+
+<script>
+  $(function () {
+    // viewport
+    var viewport = document.createElement('meta');
+    viewport.setAttribute('name', 'viewport');
+    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0');
+    document.getElementsByTagName('head')[0].appendChild(viewport);
+
+    function window_size_switch_func() {
+      if($(window).width() >= 768) {
+        // product option switch -> table
+        $('#prd-opt-table').html($('.prd-opt-table').html());
+        $('#prd-opt-table table').addClass('table table-bordered');
+        $('#prd-opt-select').empty();
+      } else {
+        // product option switch -> select
+        $('#prd-opt-table').empty();
+        if($('#prd-opt-select > *').size() == 0) {
+          $('#prd-opt-select').append($('.prd-opt-select').html());
+        }
+      }
+    }
+    window_size_switch_func();
+    $(window).load(function () {
+      $('.history-unit').tile();
+    });
+    $(window).resize(function () {
+      window_size_switch_func();
+      $('.history-unit').tile();
+    });
+  });
+</script>

@@ -1,0 +1,35 @@
+.input-prepend.input-append input {
+  font-size: 24px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  width: 100px;
+  text-align: right;
+}
+
+.imgOnMouse {
+  width: auto;
+  float: left;
+  overflow: hidden;
+}
+.imgOnMouse img {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+.imgOnMouse ul {
+  padding: 0px;
+  margin-top: 0px;
+}
+.imgOnMouse ul li img {
+  width: 100px;
+  margin-right: 5px;
+}
+.imgOnMouse ul li {
+  list-style-type: none;
+  margin: 0px;
+  float: left;
+}
+
+.expContainer {
+  width: auto;
+  float: left;
+}
